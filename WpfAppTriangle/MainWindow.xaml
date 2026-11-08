@@ -1,0 +1,77 @@
+﻿<Window x:Class="WpfAppTriangle.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Интерактивный треугольник (Drag &amp; Drop)" Height="500" Width="900"
+        MinHeight="350" MinWidth="700">
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ПЕРВОЕ ПОЛЕ: Grid для ввода сторон и кнопки -->
+        <Grid Grid.Column="0" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                <TextBlock Text="Сторона A:" FontWeight="Bold" Margin="0,0,0,3"/>
+                <TextBox x:Name="TxtSideA" Height="26" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                <TextBlock Text="Сторона B:" FontWeight="Bold" Margin="0,0,0,3"/>
+                <TextBox x:Name="TxtSideB" Height="26" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                <TextBlock Text="Сторона C:" FontWeight="Bold" Margin="0,0,0,3"/>
+                <TextBox x:Name="TxtSideC" Height="26" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <Button x:Name="BtnCalculate" Grid.Row="3" Content="Посчитать и расставить точки" Height="32" Click="BtnCalculate_Click" Background="#FF007ACC" Foreground="White" FontWeight="Bold"/>
+
+            <TextBlock x:Name="TxtError" Grid.Row="4" Foreground="Red" TextWrapping="Wrap" FontWeight="SemiBold" Margin="0,10,0,0"/>
+        </Grid>
+
+        <!-- ВТОРОЕ ПОЛЕ: Grid для вывода углов -->
+        <Grid Grid.Column="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,15">
+                <TextBlock Text="Угол α (напротив A):" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="TxtAngleA" Height="28" VerticalContentAlignment="Center" IsReadOnly="True" Background="#F0F0F0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                <TextBlock Text="Угол β (напротив B):" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="TxtAngleB" Height="28" VerticalContentAlignment="Center" IsReadOnly="True" Background="#F0F0F0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Margin="0,0,0,15">
+                <TextBlock Text="Угол γ (напротив C):" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBox x:Name="TxtAngleC" Height="28" VerticalContentAlignment="Center" IsReadOnly="True" Background="#F0F0F0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ТРЕТЬЕ ПОЛЕ: Canvas с поддержкой Drag and Drop -->
+        <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1" Margin="5" Background="#FAFAFA" ClipToBounds="True">
+            <Canvas x:Name="TriangleCanvas" 
+                    MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
+                    MouseMove="Canvas_MouseMove"
+                    MouseLeftButtonUp="Canvas_MouseLeftButtonUp"/>
+        </Border>
+    </Grid>
+    </Window>
